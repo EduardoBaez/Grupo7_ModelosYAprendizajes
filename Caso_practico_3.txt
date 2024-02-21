@@ -1,0 +1,22 @@
+Para el caso práctico número 3 se entrenó un modelo de redes neuronales convolucionales (CNN) utilizando el conjunto de datos Fashion MNIST con la finalidad de clasificar imágenes de prendas de vestir en 10 categorías diferentes
+
+Carga y Preprocesamiento de Datos:
+
+Se cargo el conjunto de datos Fashion MNIST utilizando la librería de Keras, con el siguiente formato: 
+Formato de las imágenes de entrenamiento: (60000, 28, 28, 1) Número de muestras de entrenamiento: 60000 Número de muestras de prueba: 10000
+
+Es decir, con un conjunto de entrenamiento de 60000 datos distribuidos en matrices de 28*28 pixeles y un solo canal de color (escala de grises), y un total de 10,000 datos en el conjunto de test.
+Luego se convierte a los vectores de clases en matrices de clase binaria mediante la aplicación de una one-hot encoding.
+Para la definición de las capas convolucionales se eligió una capa de 32 filtros de tamaño (3*3) con un método de activación Relu, para que luego se aplique un maxpooling despues de esta primera convolución, la segunda capa tiene 64 filtros de tamaño (3*3) con una activación Relu y una capa de max pooling después de la segunda convolución, se utiliza de una capa de aplanado que transforma las características en un vector unidimensional, una capa de dropout con una tasa de regularización de 0.5 y una capa densa totalmente conectada con 10 neuronas de clasificación, siguiendo el numero de clases que el modelo contiene, toda vez que se busca la respuesta de 10 imágenes.
+
+En primer lugar, se aplica un modelo con un cross entropy y el optimizador Adam durante 15 épocas, mismo que según el entrenamiento ha generado una accuracy y un test loss de:
+
+Test loss: 0.27074864506721497
+Test accuracy: 0.9023000001907349
+
+De manera consiguiente se genera la y predicha por el modelo para realizar la matriz de confusión, misma que genero los resultados mostrados dentro del jupyter notebook, según la línea central de la matriz de confusión se ha observado que el modelo posee una buena capacidad de predecir el conjunto de imágenes dado, sin embargo tomando en consideración que el modelo tiene un accuracy del 0.902 se decidió también probar con otro optimizador en este caso el optimizador Adamax, que tiene como objetivo calcular el segundo momento del gradiente descendente utilizando el primer momento y la norma del máximo, generando los siguientes resultados:
+
+Test loss: 0.25594857335090637
+Test accuracy: 0.9068999886512756
+
+Como se observa en las matrices de confusión se indica cual es el valor que el modelo ha predicho dentro de la línea central, que indica la cantidad de errores de predicción que ha tenido el modelo y la cantidad de predicciones correctas que ha realizado, en donde el azul mas oscuro indica una buena cantidad de imágenes predichas.
